@@ -1,22 +1,16 @@
-import React, { useState } from 'react';
-
+import React from 'react';
+import { useState } from 'react';
 //копоненты
 import moduleMain from './MainPage.module.sass'
-import MyButton from '../components/ui/button/MyButton';
-import MyPlaceholder from '../components/ui/placeholder/MyPlaceholder';
-import generateArray from '../components/sorts/array-fill';
+import MyButton from '../../../ui/button/MyButton';
+import MyPlaceholder from '../../../ui/placeholder/MyPlaceholder';
 
-import { INT25, INT100, INT500, INT1000, INT5000 } from '../dataInt'
+import { INT25, INT100, INT500, INT1000, INT5000 } from '../../../../dataInt'
 //сортировки
-import buuble_sort from '../components/sorts/bubble-sor';
-import coctail_sort from '../components/sorts/coctail-sort'
-import quick_sort from '../components/sorts/quick-sort'
-import selection_sort from '../components/sorts/selection_sort'
-import insertion_sort from '../components/sorts/simple-insertion-sort'
+import mergeSort from '../../../sorts/externalSorts/mergeSort';
+import naturalMergeSort from '../../../sorts/externalSorts/naturalMergeSort';
 
-
-const MainPage = ({ time1, ...props }) => {
-
+const ExternalIntPage = ({ ...props }) => {
     //исходный массив/ отсортированный массив
     const [array, setArray] = useState([])
     const [sortArray, setSortArray] = useState([])
@@ -45,15 +39,15 @@ const MainPage = ({ time1, ...props }) => {
     }
 
     // функция сортировки пузырьком 
-    const bubbleSort = (array) => {
+    const mergeSortFunc = (array) => {
         if (array.length > 0) {
-            setString('Пузырьком')
+            setString('Слияние')
             var totalTime = performance.now();
-            const temp = buuble_sort(structuredClone(array))
+            const temp = mergeSort(structuredClone(array))
             totalTime = (performance.now() - totalTime).toFixed(3)
             setSortArray(temp)
             if (array.length === 25) {
-                time1(totalTime)
+                props.time1(totalTime)
             }
             else if (array.length === 100) {
                 props.time2(totalTime)
@@ -73,12 +67,11 @@ const MainPage = ({ time1, ...props }) => {
         }
     }
 
-    // сортировка выбором 
-    const selectionSort = (array) => {
+    const NMergeSortFunc = (array) => {
         if (array.length > 0) {
-            setString('Выбором')
+            setString('Естественная')
             var totalTime = performance.now();
-            const temp = selection_sort(structuredClone(array))
+            const temp = mergeSort(structuredClone(array))
             totalTime = (performance.now() - totalTime).toFixed(3)
             setSortArray(temp)
             if (array.length === 25) {
@@ -90,7 +83,6 @@ const MainPage = ({ time1, ...props }) => {
             else if (array.length === 500) {
                 props.time8(totalTime)
             }
-
             else if (array.length === 1000) {
                 props.time9(totalTime)
             }
@@ -103,12 +95,11 @@ const MainPage = ({ time1, ...props }) => {
         }
     }
 
-    // Сортировка простыми вставками 
-    const insertionSort = (array) => {
+    const BMergeSortFunc = (array) => {
         if (array.length > 0) {
-            setString('Вставками')
+            setString('Баланс')
             var totalTime = performance.now();
-            const temp = insertion_sort(structuredClone(array))
+            const temp = mergeSort(structuredClone(array))
             totalTime = (performance.now() - totalTime).toFixed(3)
             setSortArray(temp)
             if (array.length === 25) {
@@ -120,7 +111,6 @@ const MainPage = ({ time1, ...props }) => {
             else if (array.length === 500) {
                 props.time13(totalTime)
             }
-
             else if (array.length === 1000) {
                 props.time14(totalTime)
             }
@@ -132,69 +122,6 @@ const MainPage = ({ time1, ...props }) => {
             console.log('Заполните массив!')
         }
     }
-
-    //шейкерная сортировка
-    const coctailSort = (array) => {
-        if (array.length > 0) {
-            setString('Шейкерная')
-            var totalTime = performance.now();
-            const temp = coctail_sort(structuredClone(array))
-            totalTime = (performance.now() - totalTime).toFixed(3)
-            setSortArray(temp)
-            if (array.length === 25) {
-                props.time16(totalTime)
-            }
-            else if (array.length === 100) {
-                props.time17(totalTime)
-            }
-            else if (array.length === 500) {
-                props.time18(totalTime)
-            }
-
-            else if (array.length === 1000) {
-                props.time19(totalTime)
-            }
-            else if (array.length === 5000) {
-                props.time20(totalTime)
-            }
-        }
-        else {
-            console.log('Заполните массив!')
-        }
-    }
-
-    //быстрая сортировка
-    const quickSort = (array) => {
-        if (array.length > 0) {
-            setString('Быстрая')
-            var totalTime = performance.now();
-            const temp = quick_sort(structuredClone(array))
-            totalTime = (performance.now() - totalTime).toFixed(3)
-            setSortArray(temp)
-            if (array.length === 25) {
-                props.time21(totalTime)
-            }
-            else if (array.length === 100) {
-                props.time22(totalTime)
-            }
-            else if (array.length === 500) {
-                props.time23(totalTime)
-            }
-
-            else if (array.length === 1000) {
-                props.time24(totalTime)
-            }
-            else if (array.length === 5000) {
-                props.time25(totalTime)
-            }
-        }
-        else {
-            console.log('Заполните массив!')
-        }
-
-    }
-
-
 
     // основная страница 
     return (
@@ -248,26 +175,19 @@ const MainPage = ({ time1, ...props }) => {
                     Метод сортировки
                 </h1>
                 <div className={moduleMain.sortBox}>
-                    <MyButton title='Пузырек' onClick={() => {
-                        bubbleSort(array)
+                    <MyButton title='Слияние' onClick={() => {
+                        mergeSortFunc(array)
                     }
                     } />
-                    <MyButton title='Выбором' onClick={() => {
-                        selectionSort(array)
+                    <MyButton title='Натуральное' onClick={() => {
+                        NMergeSortFunc(array)
                     }}
                     />
-                    <MyButton title='Вставками' onClick={() => {
-                        insertionSort(array)
+                    <MyButton title='Сбалансированное' onClick={() => {
+                        BMergeSortFunc(array)
                     }}
                     />
-                    <MyButton title='Шейкерная' onClick={() => {
-                        coctailSort(array)
-                    }}
-                    />
-                    <MyButton title='Быстрая' onClick={() => {
-                        quickSort(array)
-                    }}
-                    />
+
                 </div>
                 <MyButton style={{ 'background': '#f55d9a' }} title='Очистить' onClick={() => {
                     setArray([])
@@ -275,10 +195,8 @@ const MainPage = ({ time1, ...props }) => {
                 }}
                 />
             </div>
-
-
         </div>
     );
 };
 
-export default MainPage;
+export default ExternalIntPage;

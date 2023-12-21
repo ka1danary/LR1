@@ -1,31 +1,70 @@
-function mergeSortDirect(arr) {
-    if (arr.length <= 1) {
-        return arr;
+//мпmerge natural
+
+function mergeSort(array) {
+
+    // Base case or terminating case
+    if (array.length < 2) {
+        return array
     }
 
-    var middle = Math.floor(arr.length / 2);
-    var left = arr.slice(0, middle);
-    var right = arr.slice(middle + 1); // изменяем индекс для выбора первого элемента в правой половине массива
+    const left = []
+    const right = []
 
-    return merge(mergeSortDirect(left), mergeSortDirect(right));
-}
+    let i = 1
+    let n = array.length
 
-function merge(left, right) {
-    var result = [];
-    var leftIndex = 0;
-    var rightIndex = 0;
+    let flag = 1
 
-    while (leftIndex < left.length && rightIndex < right.length) {
-        if (left[leftIndex] < right[rightIndex]) {
-            result.push(left[leftIndex]);
-            leftIndex++;
-        } else {
-            result.push(right[rightIndex]);
-            rightIndex++;
+    while (i < n) {
+        while (array[i - 1] <= array[i] && flag === 1 && i < n) {
+            left.push(array[i - 1])
+            i++
+        }
+
+        while (array[i - 1] <= array[i] && flag === 0 && i < n) {
+            right.push(array[i - 1])
+            i++
+        }
+
+        if (array[i - 1] > array[i] && flag === 1 && i < n) {
+            left.push(array[i - 1])
+            flag = 0
+            i++
+            continue
+        }
+        if (array[i - 1] > array[i] && flag === 0) {
+            right.push(array[i - 1])
+            flag = 1
+            i++
+            continue
         }
     }
+    if (flag === 1) {
+        left.push(array[array.length - 1])
+        flag = 0
+    }
+    else {
+        right.push(array[array.length - 1])
+        flag = 1
+    }
 
-    return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+    return merge(left, right)
 }
 
-export default mergeSortDirect 
+// сортировка 
+function merge(left, right) {
+    let arr = []
+    // Break out of loop if any one of the array becomes empty
+    while (left.length && right.length) {
+        // Pick the smaller among the smallest element of left and right sub arrays 
+        if (left[0] < right[0]) {
+            arr.push(left.shift())
+        } else {
+            arr.push(right.shift())
+        }
+    }
+    return [...arr, ...left, ...right]
+}
+
+
+export default mergeSort

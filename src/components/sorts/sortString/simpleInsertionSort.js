@@ -3,6 +3,7 @@
 const simple_insertion_sort_data = (List) => {
 
     let n = List.length;
+    let counter = 0
     for (let i = 1; i < n; i++) {
         let current = List[i].Успеваемость
         let temp = List[i]
@@ -10,9 +11,11 @@ const simple_insertion_sort_data = (List) => {
         while ((j > -1) && (current < List[j].Успеваемость)) {
             List[j + 1] = List[j];
             j--;
+            counter++
         }
         List[j + 1] = temp
     }
+    console.log('Количество перестановок для сортировки простыми вставками = ' + counter )
     return List;
 }
 

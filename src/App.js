@@ -1,20 +1,19 @@
 import './reset.sass'
 import './App.sass'
+
 import { Route, Routes } from 'react-router-dom'
 import { useState } from 'react';
+
+// компоненты
 import Header from "./components/header/Header";
 import HomePage from "./components/pages/home/HomePage";
-
-import generateArray from './components/sorts/array-fill';
 import MainPage from './main/MainPage';
-
-import mergeSort from './components/sorts/externalSortString/mergeSortData.js';
-import data from './data.js'
 import SortString from './components/pages/SortsString/SortString.jsx';
+import ExternalIntPage from './components/pages/ExternalPages/ExternalInt/ExternalIntPage.jsx';
+import ExternalString from './components/pages/ExternalPages/ExternalString/ExternalString.jsx';
+import HomePageEx from './components/pages/home/HomePageEx.jsx';
 
 function App() {
-
-
   //structuredClone
   const [timeBubble25, setimeBubble25] = useState(0)
   const [timeBubble100, setimeBubble100] = useState(0)
@@ -45,6 +44,59 @@ function App() {
   const [timeQuick500, setimeQuick500] = useState(0)
   const [timeQuick1000, setimeQuick1000] = useState(0)
   const [timeQuick5000, setimeQuick5000] = useState(0)
+
+
+  //
+
+  const [timeMerge25, setimeMerge25] = useState(0)
+  const [timeMerge100, setimeMerge100] = useState(0)
+  const [timeMerge500, setimeMerge500] = useState(0)
+  const [timeMerge1000, setimeMerge1000] = useState(0)
+  const [timeMerge5000, setimeMerge5000] = useState(0)
+
+
+  const [timeNaturalMerge25, settimeNaturalMerge25] = useState(0)
+  const [timeNaturalMerge100, settimeNaturalMerge100] = useState(0)
+  const [timeNaturalMerge500, settimeNaturalMerge500] = useState(0)
+  const [timeNaturalMerge1000, settimeNaturalMerge1000] = useState(0)
+  const [timeNaturalMerge5000, settimeNaturalMerge5000] = useState(0)
+
+  //
+
+  const handleTimeMerge25 = (event) => {
+    setimeMerge25(event)
+  }
+  const handleTimeMerge100 = (event) => {
+    setimeMerge100(event)
+  }
+  const handleTimeMerge500 = (event) => {
+    setimeMerge500(event)
+  }
+  const handleTimeMerge1000 = (event) => {
+    setimeMerge1000(event)
+  }
+  const handleTimeMerge5000 = (event) => {
+    setimeMerge5000(event)
+  }
+
+
+  const handleNatTimeMerge25 = (event) => {
+    settimeNaturalMerge25(event)
+  }
+  const handleNatTimeMerge100 = (event) => {
+    settimeNaturalMerge100(event)
+  }
+  const handleNatTimeMerge500 = (event) => {
+    settimeNaturalMerge500(event)
+  }
+  const handleNatTimeMerge1000 = (event) => {
+    settimeNaturalMerge1000(event)
+  }
+  const handleNatTimeMerge5000 = (event) => {
+    settimeNaturalMerge5000(event)
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////
 
   const handletimeBubble25 = (event) => {
     setimeBubble25(event)
@@ -78,7 +130,7 @@ function App() {
     setimeSelect5000(event)
   }
 
-///
+
 
 const handletimeinser25 = (event) => {
   setimeinsert25(event)
@@ -96,7 +148,7 @@ const handletimeinser5000 = (event) => {
   setimeinsert5000(event)
 }
 
-///
+
 
 const handletimeSoctail25 = (event) => {
   setimeCoctail25(event)
@@ -114,7 +166,7 @@ const handletimeSoctail5000 = (event) => {
   setimeCoctail5000(event)
 }
 
-//
+
 
 const handletimeQuickl25 = (event) => {
   setimeQuickl25(event)
@@ -205,6 +257,52 @@ const handletimeQuickl5000 = (event) => {
           } />
         <Route path='/string'
           element={<SortString />}
+        />
+        <Route path="/analys"
+          element={
+            <HomePageEx
+              time1={timeMerge25}
+              time2={timeMerge100}
+              time3={timeMerge500}
+              time4={timeMerge1000}
+              time5={timeMerge5000}
+
+              time6={timeNaturalMerge25}
+              time7={timeNaturalMerge100}
+              time8={timeNaturalMerge500}
+              time9={timeNaturalMerge1000}
+              time10={timeNaturalMerge5000}
+
+              time11={timeNaturalMerge25}
+              time12={timeNaturalMerge100}
+              time13={timeNaturalMerge500}
+              time14={timeNaturalMerge1000}
+              time15={timeNaturalMerge5000}
+
+            />} />
+        <Route path='/EInt'
+          element={<ExternalIntPage
+            time1={handleTimeMerge25}
+            time2={handleTimeMerge100}
+            time3={handleTimeMerge500}
+            time4={handleTimeMerge1000}
+            time5={handleTimeMerge5000}
+
+            time6={handleNatTimeMerge25}
+            time7={handleNatTimeMerge100}
+            time8={handleNatTimeMerge500}
+            time9={handleNatTimeMerge1000}
+            time10={handleNatTimeMerge5000}
+
+            time11={handleNatTimeMerge25}
+            time12={handleNatTimeMerge100}
+            time13={handleNatTimeMerge500}
+            time14={handleNatTimeMerge1000}
+            time15={handleNatTimeMerge5000}
+          />}
+        />
+        <Route path='/Estring'
+          element={<ExternalString/>}
         />
 
       </Routes>

@@ -17,7 +17,15 @@ const Header = () => {
                 <li>
                     <Link to='/string'>Сортировки (String)</Link>
                 </li>
-                
+                <li>
+                    <Link to='/analys' style={{ 'color': '#f55d9a' }}>Анализ EX</Link>
+                </li>
+                <li>
+                    <Link to='/EInt'>Внешние (INT)</Link>
+                </li>
+                <li>
+                    <Link to='/Estring'>Внешние (String)</Link>
+                </li>
             </ul>
         </div>
     );

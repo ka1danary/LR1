@@ -7,7 +7,7 @@ const MyTable = ({ time1, time2, time3, time4, time5, ...props }) => {
         <div className={moduleTable.tableBox}>
             <table >
                 <tr>
-                    <td></td>
+                    <td style={{'color' : '#f55d9a'}}>ms</td>
                     <td>10</td>
                     <td>25</td>
                     <td>500</td>

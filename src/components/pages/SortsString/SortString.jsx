@@ -15,8 +15,9 @@ import QuickSort from '../../sorts/sortString/quickSortData';
 const SortString = () => {
 
     const [array, setArray] = useState(data)
-    const [sortArray, setSortArray] = useState(data)
-    
+
+    const [type, setType] = useState(' ')
+
     const [totalTime1, setTotalTime1] = useState(0)
     const [totalTime2, setTotalTime2] = useState(0)
     const [totalTime3, setTotalTime3] = useState(0)
@@ -24,6 +25,7 @@ const SortString = () => {
     const [totalTime5, setTotalTime5] = useState(0)
 
     const bubbleSort = (array) => {
+        setType('Пузырек')
         var totalTime1 = performance.now();
         const temp = bubbleSortString(structuredClone(array))
         totalTime1 = (performance.now() - totalTime1).toFixed(3)
@@ -31,6 +33,7 @@ const SortString = () => {
         setArray(temp)
     }
     const selectionSort = (array) => {
+        setType('Выбором')
         var totalTime2 = performance.now();
         const temp = selection_sort(structuredClone(array))
         totalTime2 = (performance.now() - totalTime2).toFixed(3)
@@ -38,6 +41,7 @@ const SortString = () => {
         setArray(temp)
     }
     const insertionSort = (array) => {
+        setType('Вставками')
         var totalTime3 = performance.now();
         const temp = simple_insertion_sort(structuredClone(array))
         totalTime3 = (performance.now() - totalTime3).toFixed(3)
@@ -45,6 +49,7 @@ const SortString = () => {
         setArray(temp)
     }
     const coctailSort = (array) => {
+        setType('Шейкерная')
         var totalTime4 = performance.now();
         const temp = coctailSortString(structuredClone(array))
         totalTime4 = (performance.now() - totalTime4).toFixed(3)
@@ -52,6 +57,7 @@ const SortString = () => {
         setArray(temp)
     }
     const quickSort = (array) => {
+        setType('Быстрая')
         var totalTime5 = performance.now();
         const temp = QuickSort(structuredClone(array))
         totalTime5 = (performance.now() - totalTime5).toFixed(3)
@@ -61,10 +67,21 @@ const SortString = () => {
 
     return (
         <div className={module.box}>
+            <div style={{'margin' : '10px'}}>
+                <div style={{ 'fontSize': '24px' }}>Массив записей</div>
+                <div style={{
+                    'fontSize': '20px', 'background': 'black',
+                    'color': 'white', 'width': '340px', 'padding': '10px',
+                    'margin': '5px', 'border-radius': '10px', 'display': 'flex', 'justifyContent': 'center'
+                }}>
+                    Сортировка = {type}
+                </div>
+            </div>
+
             <div className={module.array}>
                 {array.map((el, i) => <div>
                     {i}. {el['ФИО']}<>  </>
-                    {el['Номер группы']} <>  </> 
+                    {el['Номер группы']} <>  </>
                     {el['Успеваемость']}
                 </div>)}
             </div>
@@ -96,11 +113,11 @@ const SortString = () => {
             </div>
             <div className={module.table}>
                 <MyTableData
-                time1={totalTime1}
-                time2={totalTime2}
-                time3={totalTime3}
-                time4={totalTime4}
-                time5={totalTime5}
+                    time1={totalTime1}
+                    time2={totalTime2}
+                    time3={totalTime3}
+                    time4={totalTime4}
+                    time5={totalTime5}
                 />
             </div>
         </div>

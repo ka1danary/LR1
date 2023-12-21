@@ -1,14 +1,19 @@
+// побочные функции
+
+// обмен 
 const swap = (arr, a, b) => {
     let temp = arr[a]
     arr[a] = arr[b]
     arr[b] = temp
 }
 
+// оьъект для сравнения
 const Compare = {
     LESS_THAT: -1,
     BIGGER_THAN: 1
 }
 
+// функция сравнения
 const defaultCompare = (a, b) => {
 
     if (a === b) {
@@ -17,6 +22,7 @@ const defaultCompare = (a, b) => {
 
     return a < b ? Compare.LESS_THAT : Compare.BIGGER_THAN
 }
+
 
 function partition(array, pivot, left, right) {
     let pivotValue = array[pivot];

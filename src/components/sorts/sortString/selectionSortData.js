@@ -1,6 +1,7 @@
 //сортировка выбором
 
 function selectionSort(List) {
+    let counter = 0
     for (var i = 0; i < List.length - 1; i++) {
         var minIndex = i;
 
@@ -11,8 +12,9 @@ function selectionSort(List) {
         }
 
         [List[i], List[minIndex]] = [List[minIndex], List[i]];
+        counter++
     }
-
+    console.log('Количество перестановок для сортировки выбором = ' + counter )
     return List;
 }
 
