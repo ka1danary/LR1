@@ -7,7 +7,9 @@ import data from '../../../../data'
 import mergeSort from '../../../sorts/externalSorts/mergeSort';
 
 import MyButton from '../../../ui/button/MyButton';
-import MyTableExData from '../../../ui/table/MyTableExData';
+import MyTableExData from '../../../ui/table/MyTableExData'; 
+import mergeSort1 from '../../../sorts/externalSortString/naturalMergeSort';
+
 
 const ExternalString = () => {
     const [array, setArray] = useState(data)
@@ -19,7 +21,7 @@ const ExternalString = () => {
     const [totalTime3, setTotalTime3] = useState(0)
 
     const mergeSortFunc = (array) => {
-        setType('Пузырек')
+        setType('Баланс')
         var totalTime1 = performance.now();
         const temp = mergeSort(structuredClone(array))
         totalTime1 = (performance.now() - totalTime1).toFixed(3)
@@ -27,17 +29,17 @@ const ExternalString = () => {
         setArray(temp)
     }
     const naturalMergeSort = (array) => {
-        setType('Выбором')
+        setType('Естеств')
         var totalTime2 = performance.now();
-        const temp = mergeSort(structuredClone(array))
+        const temp = mergeSort1(structuredClone(array))
         totalTime2 = (performance.now() - totalTime2).toFixed(3)
         setTotalTime2(totalTime2)
         setArray(temp)
     }
     const balansedSort = (array) => {
-        setType('Вставками')
+        setType('Многопоток')
         var totalTime3 = performance.now();
-        const temp = mergeSort(structuredClone(array))
+        const temp = mergeSort1(structuredClone(array))
         totalTime3 = (performance.now() - totalTime3).toFixed(3)
         setTotalTime3(totalTime3)
         setArray(temp)

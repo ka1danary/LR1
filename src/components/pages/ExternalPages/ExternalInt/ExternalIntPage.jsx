@@ -9,6 +9,7 @@ import { INT25, INT100, INT500, INT1000, INT5000 } from '../../../../dataInt'
 //сортировки
 import mergeSort from '../../../sorts/externalSorts/mergeSort';
 import naturalMergeSort from '../../../sorts/externalSorts/naturalMergeSort';
+import mergeSort1 from '../../../sorts/externalSorts/naturalMergeSort';
 
 const ExternalIntPage = ({ ...props }) => {
     //исходный массив/ отсортированный массив
@@ -38,7 +39,7 @@ const ExternalIntPage = ({ ...props }) => {
         console.log(array.lenght)
     }
 
-    // функция сортировки пузырьком 
+    // функция сортировки слиянием 
     const mergeSortFunc = (array) => {
         if (array.length > 0) {
             setString('Слияние')
